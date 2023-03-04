@@ -1,5 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
+import {Testprod} from './components';
 
 function App() {
   return (
@@ -8,8 +8,9 @@ function App() {
        
 
 
-       
+
       </header>
+      <Testprod/>
     </div>
   );
 }
