@@ -1,21 +1,19 @@
 import './App.css';
-import {Testprod} from './components';
+import {Testprod, FooterComponent} from './components';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AddProduct } from './page';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-       
-
-
-
-      </header>
-      <Testprod/>
-      <div className='footerProductCenter'>
-        <div className='footerProduct'>
-          <h3>Scandiweb Test assignment</h3>
-        </div>
-      </div>
+      
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Testprod />} />
+            <Route path="/add-product" element={<AddProduct />} />
+        </Routes>
+        </BrowserRouter>
+        <FooterComponent/>
     </div>
   );
 }

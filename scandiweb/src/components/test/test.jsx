@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import {  Link } from 'react-router-dom';
 import axios from 'axios';
-import './test.css'
-
+import './test.css';
 
 function ProductCheckbox({ product }) {
     const [isChecked, setIsChecked] = useState(false);
@@ -36,7 +36,6 @@ function ProductCheckbox({ product }) {
 
 function Test() {
     const [products, setProducts] = useState([]);
-
     useEffect(() => {
         axios.get('http://localhost/products.php')
         .then(response => {
@@ -47,20 +46,27 @@ function Test() {
         });
     }, []);
     
-    
     return (
-
     <div className='container'>
         <div className='headerProductList'>
             <div className='ProductList'>
-            <h2>Product List</h2>
+                <h2>Product List</h2>
             </div>
+            
             <div className='buttonsContainer'>
-                <button className='buttons'  id='add-product-btn'>ADD</button>
-                <button className='buttons' id='delete-product-btn'>MASS DELETE</button>
+                <div className='buttons'>
+                    <Link to='/add-product'  id='add-product-btn'>
+                        <p className='buttonsName'>ADD</p>
+                    </Link>
+                </div>
+                <div className='buttons'>
+                    <button id='delete-product-btn'>
+                        <p>MASS DELETE</p>
+                    </button>
+                </div>
             </div>
         </div>
-        
+        {/* ------------------------------------------------------------------------------------- */}
         <div className='containerProducts'>
             {products.map(product => (
             <div className='containerProduct'>
@@ -76,8 +82,6 @@ function Test() {
         </div>
     </div>
             
-
-
     )
 }
 

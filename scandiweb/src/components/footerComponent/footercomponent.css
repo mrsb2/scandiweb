@@ -1,0 +1,22 @@
+.footerProductCenter{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+    
+    margin-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 50px;
+
+}
+.footerProduct{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100%;
+    border-top: 2px solid black;
+
+}
