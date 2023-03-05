@@ -1,7 +1,7 @@
 import './App.css';
-import {Testprod, FooterComponent} from './components';
+import {FooterComponent} from './components';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AddProduct } from './page';
+import { AddProduct, ProductPage } from './page';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       
       <BrowserRouter>
         <Routes>
-            <Route path="/" element={<Testprod />} />
+            <Route path="/" element={<ProductPage />} />
             <Route path="/add-product" element={<AddProduct />} />
         </Routes>
         </BrowserRouter>
