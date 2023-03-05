@@ -11,6 +11,11 @@ function App() {
 
       </header>
       <Testprod/>
+      <div className='footerProductCenter'>
+        <div className='footerProduct'>
+          <h3>Scandiweb Test assignment</h3>
+        </div>
+      </div>
     </div>
   );
 }

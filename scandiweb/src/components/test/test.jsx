@@ -3,6 +3,37 @@ import axios from 'axios';
 import './test.css'
 
 
+function ProductCheckbox({ product }) {
+    const [isChecked, setIsChecked] = useState(false);
+
+    function handleCheckboxChange(event) {
+        const { checked } = event.target;
+        setIsChecked(checked);
+
+        if (checked) {
+        myFunction(true, product.id);
+        }
+        else{
+            myFunction(false,product.id);
+        }
+    }
+
+    function myFunction(boolValue, productId) {
+        console.log("Bool value:", boolValue);
+        console.log("Product ID:", productId);
+        // Replace with your own code to perform actions based on the bool value and product ID
+        
+    }
+
+    return (
+        <div className='checkboxDiv'>
+            <input className='delete-checkbox' type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        </div>
+    );
+}
+
+
+
 function Test() {
     const [products, setProducts] = useState([]);
 
@@ -15,22 +46,34 @@ function Test() {
             console.log(error);
         });
     }, []);
-
-    console.log(products);
+    
+    
     return (
+
     <div className='container'>
-        <ul>
+        <div className='headerProductList'>
+            <div className='ProductList'>
+            <h2>Product List</h2>
+            </div>
+            <div className='buttonsContainer'>
+                <button className='buttons'  id='add-product-btn'>ADD</button>
+                <button className='buttons' id='delete-product-btn'>MASS DELETE</button>
+            </div>
+        </div>
+        
+        <div className='containerProducts'>
             {products.map(product => (
-            <div className='containerPost'>
-            <li key={product.id}>
-                <p className='sku'>SKU: {product.sku}</p>
-                <p className='name'>{product.name}</p>
-                <p className='price'>Price: ${product.price}</p>
-                <p className='attributes'>{product.attribute_type}: {product.attribute_value} {product.attribute_unit}</p>
-            </li>
+            <div className='containerProduct'>
+                <div key={product.id} className='containerProduct2'>
+                    <ProductCheckbox key={product.id} product={product} />
+                    <p className='sku'>Sku: {product.sku}</p>
+                    <p className='name'>Name:{product.name}</p>
+                    <p className='price'>Price: {product.price}$</p>
+                    <p className='attributes'>{product.attribute_type}: {product.attribute_value}</p>
+                </div>
             </div>
             ))}
-        </ul>
+        </div>
     </div>
             
 
