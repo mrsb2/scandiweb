@@ -30,4 +30,4 @@ VALUES
     (1, 'Size (MB)', '150'),
     (2, 'Size (MB)', '200'),
     (3, 'Weight (kg)', '0.5'),
-    (4, 'Dimensions (HxWxL)', '120x80x60');
+    (4, 'Dimensions (HxWxL)', '120x80x60'); 
