@@ -47,7 +47,7 @@ function ProductPage() {
             console.log(error);
         });
     }, []);
-    
+    console.log(products);
     return (
     <div className='container'>
         <div className='headerProductList'>
