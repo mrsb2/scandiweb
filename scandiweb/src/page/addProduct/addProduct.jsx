@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import './addproduct.css';
 import {  Link } from 'react-router-dom';
 import axios from 'axios';
@@ -17,7 +17,7 @@ const renderProductInputs = () => {
             <div className="inputName">
             <p>Size(MB)</p>
             <input autoComplete="off" id="Size" type="text" name="attribute_value" 
-            value={productInfo.attribute_value} onChange={handleInputChange}/>
+            value={productInfo.attribute_value} onChange={handleInputChangeInt}/>
             </div>
             <div className="example">
             <p>Please provide the size in Megabytes.</p>
@@ -35,7 +35,7 @@ const renderProductInputs = () => {
                 type="text"
                 name="attribute_value"
                 value={productInfo.attribute_value}
-                onChange={handleInputChange}
+                onChange={handleInputChangeInt}
             />
             </div>
             <div className="example">
@@ -101,21 +101,47 @@ const renderProductInputs = () => {
         }));
         
     };
+    const handleInputChangeInt = (event) => {
+        const { name, value } = event.target;
+        if (!isNaN(value)) { 
+            event.target.style.borderColor = ''; 
+          } else {
+            event.target.style.borderColor = 'red'; 
+          }
+        const intValue = parseInt(value);
+        setProductInfo(prevState => ({
+            ...prevState,
+            [name]: isNaN(intValue) ? '' : intValue
+        }));
+        
+    };
     
 
     const [dimension, setDimension] = useState({
-        height:'',
+        height: '',
         width:'',
         length:''
     });
     const handleInputChangeDim = (event) => {
         const { name, value } = event.target;
+        const intValue = parseInt(value);
         setDimension(prevState => ({
             ...prevState,
-            [name]: value,
+            [name]: isNaN(intValue) ? '' : intValue
         }));
     };
 
+    const triggerAPI =(product) => {
+            axios.post('http://localhost/addproduct.php', product)
+        .then(response => {
+        console.log(response.data);
+        // handle successful response from backend
+        })
+        .catch((error) => {
+        console.log(error);
+        // handle error from backend
+        });
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         productInfo.type = selectedProduct;
@@ -125,6 +151,7 @@ const renderProductInputs = () => {
         }
         productInfo.attribute_type = attributeTypeMap[selectedProduct];
         console.log(productInfo);
+        triggerAPI(productInfo);
     }
 
     return (
@@ -158,7 +185,7 @@ const renderProductInputs = () => {
                     </div>
                     <div  className='inputName'>
                         <p>Price($)</p>
-                        <input id='price' type="text" name="price" value={productInfo.price} onChange={handleInputChange} />
+                        <input id='price' type="text" name="price" value={productInfo.price} onChange={handleInputChangeInt} />
                     </div>
                     {/* <div  className='inputName'>
                     <p>Size(MB)</p>
