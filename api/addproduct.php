@@ -9,12 +9,12 @@ class AddProduct {
     private $password;
     private $dbname;
     private $conn;
-
+ 
     public function __construct() {
         $this->servername = "localhost";
         $this->username = "scandiweb_root";
         $this->password = "scandiweb2468";
-        $this->dbname = "mrsomebo_scandiweb";
+        $this->dbname = "mrsomebo_scandiweb"; 
         $this->conn = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
     }
 
