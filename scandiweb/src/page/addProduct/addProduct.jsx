@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './addproduct.css';
-import {  Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 
 
@@ -136,12 +136,12 @@ const renderProductInputs = () => {
             [name]: isNaN(intValue) ? '' : intValue
         }));
     };
-    const history = useHistory();
+    const navigate = useNavigate();
     const triggerAPI =(product) => {
             axios.post('http://localhost/addproduct.php', product)
         .then(response => {
         console.log(response.data);
-            history.push('./');
+            navigate('./');
         })
         .catch((error) => {
         console.log(error);
