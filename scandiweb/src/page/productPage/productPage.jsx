@@ -12,7 +12,7 @@ function ProductPage() {
     const deleteProducts = async (productIds) => {
     
         try {
-        const response = await axios.post('http://localhost/deleteproduct.php', { productIds });
+        const response = await axios.post('http://scandiweb.mrsomebody.space/deleteproduct.php', { productIds });
         window.location.reload();
         } catch (error) {
         console.error(error);
@@ -40,7 +40,7 @@ function ProductPage() {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost/products.php')
+        axios.get('http://scandiweb.mrsomebody.space/products.php')
         .then(response => {
             setProducts(response.data);
         })

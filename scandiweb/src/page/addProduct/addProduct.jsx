@@ -16,7 +16,7 @@ const renderProductInputs = () => {
         <div className="inputContainerType">
             <div className="inputName">
             <p>Size(MB)</p>
-            <input autoComplete="off" id="Size" type="text" name="attribute_value" 
+            <input autoComplete="off" id="size" type="text" name="attribute_value" 
             value={productInfo.attribute_value} onChange={handleInputChangeInt}/>
             </div>
             <div className="example">
@@ -31,7 +31,7 @@ const renderProductInputs = () => {
             <p>Weight(KG)</p>
             <input
                 autoComplete="off"
-                id="Weight"
+                id="weight"
                 type="text"
                 name="attribute_value"
                 value={productInfo.attribute_value}
@@ -138,7 +138,7 @@ const renderProductInputs = () => {
     
     const navigate = useNavigate();
     const triggerAPI =(product) => {
-            axios.post('http://localhost/addproduct.php', product)
+            axios.post('http://scandiweb.mrsomebody.space/addproduct.php', product)
         .then(response => {
         navigate('../');
         
@@ -168,7 +168,7 @@ const renderProductInputs = () => {
             
             <div className='buttonsContainer'>
                 <div className='buttons'>
-                    <input id='save' type='submit' form='formProduct' value={'Save'}></input>
+                    <input id='save' type='submit' form='product_form' value={'Save'}></input>
                 </div>
                 <div className='buttons'>
                     <Link to='/'  id='cancel'>
@@ -179,7 +179,7 @@ const renderProductInputs = () => {
         </div>
         {/* ------------------------------------------------------------------------------------- */}
         <div className='containerAdd'>
-            <form id='formProduct' className='formContainer' onSubmit={handleSubmit} >
+            <form id='product_form' className='formContainer' onSubmit={handleSubmit} >
                 <div  className='inputName'>
                         <p>SKU</p>
                         <input id='sku' type="text" name="sku" value={productInfo.sku} onChange={handleInputChange}  />
@@ -192,10 +192,6 @@ const renderProductInputs = () => {
                         <p>Price($)</p>
                         <input id='price' type="text" name="price" value={productInfo.price} onChange={handleInputChangeInt} />
                     </div>
-                    {/* <div  className='inputName'>
-                    <p>Size(MB)</p>
-                    <input id='Size' type="text" name="attributeValue" value={productInfo.attributeValue} onChange={handleInputChange} />
-                    </div> */}
                 <div className='dropdownSwitch'>
                     <label htmlFor="product-selector">Type Switcher</label>
                     <select  id='productType' value={selectedProduct} onChange={handleChange}>
