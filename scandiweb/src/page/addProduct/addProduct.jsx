@@ -4,29 +4,53 @@ import {  Link } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select'
 
-const addProduct = () => {
 
-    const options = [
-        { value: 'DVD', label: 'DVD' },
-        { value: 'Book', label: 'Book' },
-        { value: 'Furniture', label: 'Furniture' }
-    ]
-    
-    const [selectedProductType, setSelectedProductType] = useState('DVD');
 
-    const handleSelectChange = (event) => {
-        setSelectedProductType(event.target.value);
+
+
+
+
+const DVD = () =>{
+    return(
+        <div className='inputContainerType'>
+            <div  className='inputName'>
+                <p>Size(MB)</p>
+                <input id='size' type="text" size="sku" />
+            </div>
+        </div>
+    )
+}
+
+
+
+
+
+
+
+
+function AddProduct() {
+
+
+    const [selectedProduct, setSelectedProduct] = useState();
+
+    const handleChange = (event) => {
+      setSelectedProduct(event.target.value);
     };
-
-
-
-
-
-
-
-
-
-
+  
+    const renderComponent = () => {
+      switch (selectedProduct) {
+        case "DVD":
+          return <DVD/>
+        case "Book":
+          return <p>book</p>;
+        case "Furniture":
+          return <p>fu</p>;
+        default:
+          return null;
+      }
+    };
+    
+    console.log(selectedProduct);
 
   return (
     <div className='container'>
@@ -43,7 +67,7 @@ const addProduct = () => {
                 </div>
                 <div className='buttons'>
                     <Link to='/'  id='add-product-btn'>
-                        <p className='buttonsName'>Save</p>
+                        <p className='buttonsName'>Cancel</p>
                     </Link>
                 </div>
             </div>
@@ -54,26 +78,33 @@ const addProduct = () => {
                 <label>
                     <div  className='inputName'>
                         <p>SKU</p>
-                        <input id='sku' type="text" sku="sku" />
+                        <input id='sku' type="text"  />
                     </div>
                     <div  className='inputName'>
                         <p>Name</p>
-                        <input id='name' type="text" name="name" />
+                        <input id='name' type="text"  />
                     </div>
                     <div  className='inputName'>
                         <p>Price($)</p>
-                        <input id='price' type="text" price="name" />
+                        <input id='price' type="text"  />
                     </div>
                     
                 </label>
                 <div className='dropdownSwitch'>
-                <Select id='productType' options={options} />
+                <label htmlFor="product-selector">Type Switcher</label>
+                    <select  id='productType' value={selectedProduct} onChange={handleChange}>
+                        <option value="">Select an option</option>
+                        <option value="DVD">DVD</option>
+                        <option value="Book">Book</option>
+                        <option value="Furniture">Furniture</option>
+                    </select>
+                    
                 </div>
-                    {/* <input className='sumitBtn' type="submit" value="Submit" /> */}
+                {renderComponent()}
             </form>
         </div>
     </div>
     )
 }
 
-export default addProduct
+export default AddProduct
