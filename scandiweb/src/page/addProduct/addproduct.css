@@ -1,0 +1,25 @@
+.containerAdd{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+}
+.formContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.inputName{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.inputName>p{
+    text-align: start;
+    width: 100px;
+}
+.dropdownSwitch{
+    width: 100%;
+}
