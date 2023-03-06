@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './addproduct.css';
 import {  Link, useNavigate } from 'react-router-dom';
-
 import axios from 'axios';
 
 
@@ -142,6 +141,7 @@ const renderProductInputs = () => {
             axios.post('http://localhost/addproduct.php', product)
         .then(response => {
         navigate('../');
+        
         })
         .catch((error) => {
         console.log(error);
@@ -156,7 +156,6 @@ const renderProductInputs = () => {
             productInfo.attribute_value = `${dimension.height}x${dimension.width}x${dimension.length}`
         }
         productInfo.attribute_type = attributeTypeMap[selectedProduct];
-        console.log(productInfo);
         triggerAPI(productInfo);
     }
 
