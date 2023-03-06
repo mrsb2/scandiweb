@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Link, useNavigate } from 'react-router-dom';
+import {  Link } from 'react-router-dom';
 import axios from 'axios';
 import './productpage.css';
 
@@ -9,16 +9,11 @@ import './productpage.css';
 function ProductPage() {
     
     const [checkedIds, setCheckedIds] = useState([]);
-    const navigate = useNavigate();
     const deleteProducts = async (productIds) => {
     
         try {
         const response = await axios.post('http://localhost/deleteproduct.php', { productIds });
-        console.log(response.data);
-        console.log('deleted');
-        navigate('./');
         window.location.reload();
-        // Navigate back to home page or do any other necessary action
         } catch (error) {
         console.error(error);
         }
@@ -28,7 +23,6 @@ function ProductPage() {
 
     function handleCheckboxChange(event, product) {
         const { checked } = event.target;
-        const productId= event.target.value;
 
         if (checked) {
         setCheckedIds((prevState) => [...prevState, product.id]);
@@ -41,13 +35,8 @@ function ProductPage() {
 
     function handleDelete() {
         deleteProducts(checkedIds)
-        console.log(checkedIds);
+        
     }
-
-    
-
-
-
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
