@@ -1,42 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import {  Link } from 'react-router-dom';
+import {  Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './productpage.css';
 
-function ProductCheckbox({ product }) {
-    const [isChecked, setIsChecked] = useState(false);
 
-    function handleCheckboxChange(event) {
-        const { checked } = event.target;
-        setIsChecked(checked);
 
-        if (checked) {
-        myFunction(true, product.id);
-        }
-        else{
-            myFunction(false,product.id);
-        }
-    }
-
-    function myFunction(boolValue, productId) {
-        console.log("Bool value:", boolValue);
-        console.log("Product ID:", productId);
-        // Replace with your own code to perform actions based on the bool value and product ID
-        
-    }
-
-    return (
-        <div className='checkboxDiv'>
-            <input className='delete-checkbox' type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
-        </div>
-    );
-}
-
-function MassDelete(){
-    console.log('delete');
-}
 
 function ProductPage() {
+    
+    const [checkedIds, setCheckedIds] = useState([]);
+    const navigate = useNavigate();
+    const deleteProducts = async (productIds) => {
+    
+        try {
+        const response = await axios.post('http://localhost/deleteproduct.php', { productIds });
+        console.log(response.data);
+        console.log('deleted');
+        navigate('./');
+        window.location.reload();
+        // Navigate back to home page or do any other necessary action
+        } catch (error) {
+        console.error(error);
+        }
+    };
+
+
+
+    function handleCheckboxChange(event, product) {
+        const { checked } = event.target;
+        const productId= event.target.value;
+
+        if (checked) {
+        setCheckedIds((prevState) => [...prevState, product.id]);
+        } else {
+        setCheckedIds((prevState) =>
+            prevState.filter((id) => id !== product.id)
+        );
+        }
+    }
+
+    function handleDelete() {
+        deleteProducts(checkedIds)
+        console.log(checkedIds);
+    }
+
+    
+
+
+
+
     const [products, setProducts] = useState([]);
     useEffect(() => {
         axios.get('http://localhost/products.php')
@@ -62,7 +74,7 @@ function ProductPage() {
                     </Link>
                 </div>
                 <div className='buttons'>
-                    <button id='delete-product-btn' onClick={MassDelete}>
+                    <button id='delete-product-btn' onClick={handleDelete}>
                         <p>MASS DELETE</p>
                     </button>
                 </div>
@@ -70,18 +82,25 @@ function ProductPage() {
         </div>
         {/* ------------------------------------------------------------------------------------- */}
         <div className='containerProducts'>
-            {products.map(product => (
-            <div key={product.id} className='containerProduct'>
-                <div  className='containerProduct2'>
-                    <ProductCheckbox key={product.id} product={product} />
-                    <p className='sku'>Sku: {product.sku}</p>
-                    <p className='name'>Name:{product.name}</p>
-                    <p className='price'>Price: {product.price}$</p>
-                    <p className='attributes'>{product.attribute_type}: {product.attribute_value}</p>
-                </div>
-            </div>
-            ))}
+            {Array.isArray(products) ? (
+                products.map(product => (
+                    <div key={product.id} className='containerProduct'>
+                        <div  className='containerProduct2'>
+                            <div className='checkboxDiv'>
+                                <input className='delete-checkbox' type="checkbox" onChange={(event) => handleCheckboxChange(event, product)} />
+                            </div>
+                            <p className='sku'>Sku: {product.sku}</p>
+                            <p className='name'>Name:{product.name}</p>
+                            <p className='price'>Price: {product.price}$</p>
+                            <p className='attributes'>{product.attribute_type}: {product.attribute_value}</p>
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p>No products found.</p>
+            )}
         </div>
+
     </div>
             
     )

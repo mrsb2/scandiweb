@@ -136,19 +136,12 @@ const renderProductInputs = () => {
             [name]: isNaN(intValue) ? '' : intValue
         }));
     };
+    
     const navigate = useNavigate();
-    const redirect = () => {
-        navigate('./');
-        console.log('redirect2');
-    }
     const triggerAPI =(product) => {
             axios.post('http://localhost/addproduct.php', product)
         .then(response => {
-        console.log(response.data);
-        console.log('redirect');
-        
-            redirect();
-            console.log('redirect2');
+        navigate('../');
         })
         .catch((error) => {
         console.log(error);
