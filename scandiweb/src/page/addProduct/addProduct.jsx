@@ -1,6 +1,7 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import './addproduct.css';
 import {  Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -105,9 +106,9 @@ const renderProductInputs = () => {
         const { name, value } = event.target;
         if (!isNaN(value)) { 
             event.target.style.borderColor = ''; 
-          } else {
+            } else {
             event.target.style.borderColor = 'red'; 
-          }
+            }
         const intValue = parseInt(value);
         setProductInfo(prevState => ({
             ...prevState,
@@ -124,22 +125,27 @@ const renderProductInputs = () => {
     });
     const handleInputChangeDim = (event) => {
         const { name, value } = event.target;
+        if (!isNaN(value)) { 
+            event.target.style.borderColor = ''; 
+            } else {
+            event.target.style.borderColor = 'red'; 
+            }
         const intValue = parseInt(value);
         setDimension(prevState => ({
             ...prevState,
             [name]: isNaN(intValue) ? '' : intValue
         }));
     };
-
+    const history = useHistory();
     const triggerAPI =(product) => {
             axios.post('http://localhost/addproduct.php', product)
         .then(response => {
         console.log(response.data);
-        // handle successful response from backend
+            history.push('./');
         })
         .catch((error) => {
         console.log(error);
-        // handle error from backend
+            
         });
     }
     const handleSubmit = (event) => {
