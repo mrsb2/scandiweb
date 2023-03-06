@@ -73,7 +73,7 @@ const addProduct = () => {
             </form>
         </div>
     </div>
-  )
+    )
 }
 
 export default addProduct
