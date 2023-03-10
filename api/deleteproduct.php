@@ -11,7 +11,7 @@ class DeleteProduct {
     private $password;
     private $dbname;
     private $conn;
-
+    // i ve forgot to made them as .env
     public function __construct() {
         $this->servername = "localhost";
         $this->username = "scandiweb_root";
