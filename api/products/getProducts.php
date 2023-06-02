@@ -21,7 +21,9 @@ class getProducts{
         $products = $result->fetch_all(MYSQLI_ASSOC);
         header('Content-Type: application/json');
         echo json_encode($products);
+        mysqli_close($conn);
     }
+    
 }
 
 ?>

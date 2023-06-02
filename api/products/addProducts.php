@@ -54,6 +54,7 @@ class Book extends Product {
             $sql = "INSERT INTO product_attributes (product_id, attribute_type, attribute_value) VALUES ($product_id , '$attribute_type', '$weight')";
             if (mysqli_query($conn, $sql)) {
                 echo "Product attribute inserted successfully.\n";
+                mysqli_close($conn);
             } else {
                 echo "Error inserting product attribute: " . mysqli_error($conn) . "\n";
             }
@@ -89,6 +90,7 @@ class DVD extends Product {
             $sql = "INSERT INTO product_attributes (product_id, attribute_type, attribute_value) VALUES ($product_id , '$attribute_type', '$size')";
             if (mysqli_query($conn, $sql)) {
                 echo "Product attribute inserted successfully.\n";
+                mysqli_close($conn);
             } else {
                 echo "Error inserting product attribute: " . mysqli_error($conn) . "\n";
             }
@@ -115,7 +117,7 @@ class Furniture extends Product {
         $type = $this->type;
         $attribute_type = $this->attribute_type;
         $attribute_value = $this->attribute_value;
-        $dimmension = $attribute_value->height . 'x' . $attribute_value->width . 'x' . $attribute_value->length;
+        $dimmension = $attribute_value->height . 'x' . $attribute_value->width . 'x' . $attribute_value->length . 'Cm';
         $sql = "INSERT INTO products (sku,name,  price, type) VALUES ( '$sku','$name', $price, '$type')";
         if (mysqli_query($conn, $sql)) {
             $product_id = mysqli_insert_id($conn);
@@ -125,6 +127,7 @@ class Furniture extends Product {
             $sql = "INSERT INTO product_attributes (product_id, attribute_type, attribute_value) VALUES ($product_id , '$attribute_type', '$dimmension')";
             if (mysqli_query($conn, $sql)) {
                 echo "Product attribute inserted successfully.\n";
+                mysqli_close($conn);
             } else {
                 echo "Error inserting product attribute: " . mysqli_error($conn) . "\n";
             }

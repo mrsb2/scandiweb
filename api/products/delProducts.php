@@ -17,8 +17,9 @@ class delProducts
             // Delete the product from the products table
             $sql = "DELETE FROM products WHERE id='$id'";
             $result = $conn->query($sql);
+            
         }
-    
+        mysqli_close($conn);
     }
 }
 
