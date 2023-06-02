@@ -17,7 +17,7 @@ const renderProductInputs = () => {
             <div className="inputName">
             <p>Size(MB)</p>
             <input autoComplete="off" id="size" type="text" name="attribute_value" 
-            value={productInfo.attribute_value} onChange={handleInputChangeInt}/>
+            value={productInfo.attribute_value} onChange={handleInputChangeDecimal}/>
             </div>
             <div className="example">
             <p>Please provide the size in Megabytes.</p>
@@ -35,7 +35,7 @@ const renderProductInputs = () => {
                 type="text"
                 name="attribute_value"
                 value={productInfo.attribute_value}
-                onChange={handleInputChangeInt}
+                onChange={handleInputChangeDecimal}
             />
             </div>
             <div className="example">
@@ -101,20 +101,20 @@ const renderProductInputs = () => {
         }));
         
     };
-    const handleInputChangeInt = (event) => {
+    const handleInputChangeDecimal = (event) => {
         const { name, value } = event.target;
-        if (isNaN(value)) { 
-            event.target.style.borderColor = 'red'; 
-            } else {
-            event.target.style.borderColor = ''; 
-            }
-        const intValue = parseInt(value);
+        const numericValue = value.replace(/[^0-9.]/g, '');
+        if (numericValue !== value) {
+          event.target.value = numericValue;
+          event.target.style.borderColor = 'red';
+        } else {
+          event.target.style.borderColor = '';
+        }
         setProductInfo(prevState => ({
-            ...prevState,
-            [name]: isNaN(intValue) ? '' : intValue
+          ...prevState,
+          [name]: numericValue
         }));
-        
-    };
+      };
     
 
     const [dimension, setDimension] = useState({
@@ -192,7 +192,7 @@ const renderProductInputs = () => {
                     </div>
                     <div  className='inputName'>
                         <p>Price($)</p>
-                        <input id='price' type="text" name="price" value={productInfo.price} onChange={handleInputChangeInt} />
+                        <input id='price' type="text" name="price" value={productInfo.price} onChange={handleInputChangeDecimal}pattern="\d*\.?\d*" />
                     </div>
                 <div className='dropdownSwitch'>
                     <label htmlFor="product-selector">Type Switcher</label>
