@@ -4,18 +4,18 @@
 
 abstract class Product {
     
-    protected $name;
     protected $sku;
+    protected $name;
     protected $price;
     protected $type;
     
     protected $attribute_type;
     protected $attribute_value;
 
-    public function __construct($name, $sku, $price,$type,$attribute_type, $attribute_value) {
+    public function __construct($sku,$name , $price,$type,$attribute_type, $attribute_value) {
         
-        $this->name = $name;
         $this->sku = $sku;
+        $this->name = $name;
         $this->price = $price;
         $this->type = $type;
         $this->attribute_type=$attribute_type;
@@ -30,17 +30,17 @@ abstract class Product {
 class Book extends Product {
     
 
-    public function __construct($name, $sku, $price, $type, $attribute_type, $attribute_value) {
+    public function __construct($sku,$name,  $price, $type, $attribute_type, $attribute_value) {
         
-        parent::__construct($name, $sku, $price,$type,$attribute_type, $attribute_value);
+        parent::__construct($sku,$name,  $price,$type,$attribute_type, $attribute_value);
         
     }
 
     public function add() {
         global $conn;
-        
-        $name = $this->name;
+
         $sku = $this->sku;
+        $name = $this->name;
         $price = $this->price;
         $type = $this->type;
         $attribute_type = $this->attribute_type;
@@ -66,17 +66,17 @@ class Book extends Product {
 class DVD extends Product {
     
 
-    public function __construct($name, $sku, $price, $type, $attribute_type, $attribute_value) {
+    public function __construct($sku,$name, $price, $type, $attribute_type, $attribute_value) {
         
-        parent::__construct($name, $sku, $price,$type,$attribute_type, $attribute_value);
+        parent::__construct($sku,$name,  $price,$type,$attribute_type, $attribute_value);
         
     }
 
     public function add() {
         global $conn;
         
-        $name = $this->name;
         $sku = $this->sku;
+        $name = $this->name;
         $price = $this->price;
         $type = $this->type;
         $attribute_type = $this->attribute_type;
