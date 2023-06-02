@@ -1,0 +1,5 @@
+{
+    "prettier.configPath": "C:/xampp/php/php.exe",
+    "prettier.ignorePath": ".prettierignore",
+    "php.validate.executablePath": "C:/xampp/php/php.exe"
+}

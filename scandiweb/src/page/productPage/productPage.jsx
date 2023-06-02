@@ -12,8 +12,9 @@ function ProductPage() {
     const deleteProducts = async (productIds) => {
     
         try {
-        const response = await axios.post('http://scandiweb.mrsomebody.space/deleteproduct.php', { productIds });
+        const response = await axios.post('https://php.mrsomebody.space/delProducts', { productIds });
         window.location.reload();
+        console.log(response);
         } catch (error) {
         console.error(error);
         }
@@ -40,15 +41,16 @@ function ProductPage() {
 
     const [products, setProducts] = useState([]);
     useEffect(() => {
-        axios.get('http://scandiweb.mrsomebody.space/products.php')
+        axios.get('https://php.mrsomebody.space/getProducts')
         .then(response => {
             setProducts(response.data);
+            console.log(response);
         })
         .catch(error => {
             console.log(error);
         });
     }, []);
-    console.log(products);
+    //console.log(products);
     return (
     <div className='container'>
         <div className='headerProductList'>

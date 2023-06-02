@@ -66,13 +66,13 @@
 
 @media screen and (max-width:500px) {
     #cancel>p{
-        font-size: 0.7rem;
-        font-weight: 500;  
-        width: 50px;
+        font-size: 1.2rem;
+        font-weight: 700;  
+        width: 100%;
     }
     #save>p{
-        font-size: 0.7rem;
-        font-weight: 500; 
-        width: 50px;
+        font-size: 1.2rem;
+        font-weight: 700; 
+        width: 100%;
     }
 }

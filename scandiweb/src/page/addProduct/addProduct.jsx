@@ -74,8 +74,8 @@ const renderProductInputs = () => {
 
     const [selectedProduct, setSelectedProduct] = useState();
     const attributeTypeMap = {
-        DVD: 'Size (MB)',
-        Book: 'Weight (KG)',
+        DVD: 'Size',
+        Book: 'Weight',
         Furniture: 'Dimensions (HxWxL)'
     }
 
@@ -103,10 +103,10 @@ const renderProductInputs = () => {
     };
     const handleInputChangeInt = (event) => {
         const { name, value } = event.target;
-        if (!isNaN(value)) { 
-            event.target.style.borderColor = ''; 
-            } else {
+        if (isNaN(value)) { 
             event.target.style.borderColor = 'red'; 
+            } else {
+            event.target.style.borderColor = ''; 
             }
         const intValue = parseInt(value);
         setProductInfo(prevState => ({
@@ -138,8 +138,10 @@ const renderProductInputs = () => {
     
     const navigate = useNavigate();
     const triggerAPI =(product) => {
-            axios.post('http://scandiweb.mrsomebody.space/addproduct.php', product)
+            axios.post('https://php.mrsomebody.space/addProducts', product)
         .then(response => {
+            console.log(product);
+            console.log(response);
         navigate('../');
         
         })
@@ -153,7 +155,7 @@ const renderProductInputs = () => {
         productInfo.type = selectedProduct;
         if(selectedProduct==="Furniture")
         {
-            productInfo.attribute_value = `${dimension.height}x${dimension.width}x${dimension.length}`
+            productInfo.attribute_value = dimension;//`${dimension.height}x${dimension.width}x${dimension.length}`
         }
         productInfo.attribute_type = attributeTypeMap[selectedProduct];
         triggerAPI(productInfo);
