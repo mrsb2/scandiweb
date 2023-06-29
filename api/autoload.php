@@ -11,11 +11,21 @@ spl_autoload_register(function ($class_name) {
       $products_directory = $base_directory . '/products';
       $products_file = $products_directory . '/' . str_replace('\\', '/', $class_name) . '.php';
 
-      if (file_exists($products_file)) {
-          include $products_file;
-          
-      }
-  }
+        if (file_exists($products_file)) {
+            include $products_file;
+            
+        }
+        else {
+                $products_directory = $base_directory . '/products/type';
+                $products_file = $products_directory . '/' . str_replace('\\', '/', $class_name) . '.php';
+        
+                if (file_exists($products_file)) {
+                    include $products_file;
+                    
+                }
+
+            }
+    }
 });
 
 
